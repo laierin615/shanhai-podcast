@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>山海之聲學習單列印版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: 螢幕上是工具列＋一疊 A4 紙；列印時只印紙。紙永遠是白底黑字，工具列跟著淺色／深色主題 */
+:root {
+  --desk: #dfe5e4; --bar: #f7f9f8; --bar-ink: #142427; --bar-muted: #4a5d61; --bar-line: #c3cecc; --accent: #0a6670; --on-accent: #ffffff;
+  --paper: #ffffff; --ink: #111a1c; --soft: #5b6a6d; --rule: #9aa7a9; --fill: #eef2f1; --ex: #8a5c00;
+  --font-display: "LXGW WenKai TC", "Kaiti TC", "BiauKai", "DFKai-SB", serif;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --desk: #111618; --bar: #192024; --bar-ink: #e6ecea; --bar-muted: #9aa9ab; --bar-line: #2f3a3e; --accent: #55c3ca; --on-accent: #101416; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --desk: #111618; --bar: #192024; --bar-ink: #e6ecea; --bar-muted: #9aa9ab; --bar-line: #2f3a3e; --accent: #55c3ca; --on-accent: #101416; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--desk); color: var(--bar-ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; padding-bottom: env(safe-area-inset-bottom, 0px); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bar); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bar); border-bottom: 1px solid var(--bar-line); }
+.bar-inner { max-width: 980px; margin: 0 auto; padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 10px; }
+.bar-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.bar h1 { margin: 0; font-family: var(--font-display); font-size: 22px; flex: 1 1 auto; }
+.bar a { color: var(--accent); }
+.seg { display: inline-flex; border: 1.5px solid var(--bar-line); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: 14px; font-weight: 700; padding: 6px 12px; min-height: 38px; border: 0; background: transparent; color: var(--bar-muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.btn { font: inherit; font-weight: 700; min-height: 40px; padding: 6px 16px; border-radius: 8px; border: 1.5px solid var(--accent); background: var(--accent); color: var(--on-accent); cursor: pointer; }
+.picks { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; }
+.picks label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; min-height: 32px; }
+.picks input { width: 18px; height: 18px; accent-color: var(--accent); }
+.hint { margin: 0; font-size: 13px; color: var(--bar-muted); }
+
+.stack { display: grid; justify-content: center; gap: 24px; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.scroller { overflow-x: auto; max-width: 100%; }
+
+/* ---------- 紙 ---------- */
+.sheet { width: 210mm; min-height: 297mm; padding: 14mm 13mm; background: var(--paper); color: var(--ink); box-shadow: 0 2px 10px rgba(0,0,0,.18); display: flex; flex-direction: column; gap: 5mm; font-size: 10.5pt; line-height: 1.5; }
+.sheet.wide { width: 297mm; min-height: 210mm; }
+.s-head { display: grid; gap: 2mm; border-bottom: 1.6pt solid var(--ink); padding-bottom: 2.5mm; }
+.s-kicker { display: flex; justify-content: space-between; gap: 6mm; font-family: var(--font-mono); font-size: 8.5pt; color: var(--soft); letter-spacing: .04em; }
+.s-title { margin: 0; font-family: var(--font-display); font-size: 21pt; line-height: 1.2; display: flex; align-items: baseline; gap: 4mm; flex-wrap: wrap; }
+.s-title .n { font-family: var(--font-mono); font-size: 11pt; color: #fff; background: var(--ink); padding: .6mm 2.4mm; border-radius: 1mm; }
+.s-badge { font-family: var(--font-body); font-size: 9pt; font-weight: 700; color: var(--ex); border: 1pt solid var(--ex); border-radius: 1mm; padding: 0 2mm; }
+.s-who { display: flex; flex-wrap: wrap; gap: 2mm 7mm; font-size: 10.5pt; align-items: flex-end; }
+.s-who span { display: inline-flex; align-items: flex-end; gap: 2mm; }
+.s-who i { display: inline-block; border-bottom: .8pt solid var(--ink); min-width: 32mm; height: 6mm; }
+.s-who .box { font-style: normal; }
+
+.f { display: grid; gap: 1.5mm; break-inside: avoid; page-break-inside: avoid; }
+.f-label { font-weight: 700; font-size: 10.5pt; }
+.f-note { padding: 2.5mm 3.5mm; background: var(--fill); border-left: 1.2mm solid var(--ink); font-size: 10pt; }
+.line { position: relative; height: 8.5mm; border-bottom: .7pt solid var(--rule); }
+.line.single { height: 8.5mm; }
+.exw { position: absolute; left: 1mm; bottom: 1mm; right: 1mm; font-family: var(--font-display); font-size: 11pt; color: var(--ex); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.area-ex { font-family: var(--font-display); font-size: 11pt; color: var(--ex); line-height: 8.5mm; background: repeating-linear-gradient(to bottom, transparent 0 calc(8.5mm - .7pt), var(--rule) calc(8.5mm - .7pt) 8.5mm); min-height: 27mm; padding-inline: 1mm; }
+.opts { display: grid; grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr)); gap: 1mm 6mm; }
+.opt { display: flex; gap: 2mm; align-items: flex-start; }
+.opt b { flex: none; font-family: var(--font-mono); font-weight: 500; font-size: 12pt; line-height: 1.25; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { border: .7pt solid var(--ink); padding: 1mm 1.6mm; text-align: left; vertical-align: top; font-size: 9.5pt; }
+thead th { background: var(--fill); font-weight: 700; }
+td { height: 9.5mm; font-family: var(--font-display); font-size: 10pt; color: var(--ex); line-height: 1.35; word-break: break-word; }
+th.rl { background: var(--fill); font-weight: 500; font-size: 9pt; }
+.s-foot { margin-top: auto; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 7.5pt; color: var(--soft); border-top: .5pt solid var(--rule); padding-top: 1.5mm; }
+
+@page { size: A4 portrait; margin: 11mm 12mm; }
+@page wide { size: A4 landscape; margin: 10mm 12mm; }
+@media print {
+  body { background: #fff; padding: 0; }
+  body::before, .bar { display: none; }
+  .stack { display: block; padding: 0; }
+  .scroller { overflow: visible; }
+  .sheet, .sheet.wide { box-shadow: none; min-height: 0; width: auto; padding: 0; gap: 3mm; }
+  .s-foot { margin-top: 2mm; }
+  .scroller:not(.first) { break-before: page; page-break-before: always; }
+  .sheet.wide { page: wide; }
+  .sheet[hidden] { display: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-inner">
+    <div class="bar-top">
+      <h1>學習單列印版</h1>
+      <div class="seg" role="group" aria-label="版本">
+        <button type="button" id="mode-blank" aria-pressed="true">空白版（學生）</button>
+        <button type="button" id="mode-example" aria-pressed="false">範例版（老師）</button>
+      </div>
+      <button type="button" class="btn" id="print-btn">列印</button>
+    </div>
+    <div class="picks" id="picks" aria-label="要印哪幾張"></div>
+    <p class="hint">A4 直式，學習單 3 是橫式。iPad：按「列印」，或 Safari 分享 →「列印」。印 PDF：列印畫面選「儲存為 PDF」。<a href="index.html#sheets">回到網站學習單</a></p>
+  </div>
+</header>
+<main class="stack" id="stack"></main>
+
+<script src="content.js"></script>
+<script>
+(function printSheets() {
+  "use strict";
+  const C = window.COURSE;
+  const $ = (s) => document.querySelector(s);
+  const esc = (v) => String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  /** 表格欄寬比例（依欄位 id）；沒寫的就平均 */
+  const WEIGHTS = {
+    radar: [1],
+    questions: [1],
+    rundown: [1.2, 3],
+    interview: [1, 3.4, 2.4, 1.1],
+    cites: [1.1, 1.8, .9, 1.2, .8, 3.2, 1.9, 1.9],
+    web: [2.6, 1.2, 1.6, 1.4, 1.8, 1],
+    cross: [1.6, 2, 2, 2.2],
+    doubt: [1, 1],
+    spoken: [1, 1.6],
+    marks: [.9, 1, 3.4],
+    feedback: [1, 2],
+    sandwich: [.9, 2, 2, 2],
+    self: [1],
+  };
+  const WIDE = ["ws3"];
+  const AREA_LINES = { core: 2, teaser: 2, opening: 3, learned: 3, closing: 2, noPublic: 2, elderWord: 2, improve: 2, thanksCard: 4 };
+
+  const state = { example: location.hash === "#example", picked: new Set(C.WORKSHEETS.map((s) => s.id)) };
+
+  const exCell = (ex, r, c) => {
+    if (!state.example || !Array.isArray(ex)) return "";
+    const row = ex[r];
+    if (Array.isArray(row)) return row[c] || "";
+    return c === 0 && typeof row === "string" ? row : "";
+  };
+
+  function field(f) {
+    switch (f.type) {
+      case "note": return `<div class="f f-note">${f.html}</div>`;
+      case "text": return `<div class="f"><span class="f-label">${esc(f.label)}</span><div class="line single">${state.example && f.ex ? `<span class="exw">${esc(f.ex)}</span>` : ""}</div></div>`;
+      case "area": {
+        const n = AREA_LINES[f.id] || 3;
+        if (state.example && f.ex) return `<div class="f"><span class="f-label">${esc(f.label)}</span><div class="area-ex" style="min-height:${n * 8.5}mm">${esc(f.ex)}</div></div>`;
+        return `<div class="f"><span class="f-label">${esc(f.label)}</span>${'<div class="line"></div>'.repeat(n)}</div>`;
+      }
+      case "checks": case "radio": {
+        const mark = f.type === "checks" ? "☐" : "○";
+        const long = f.options.some((o) => o.length > 16);
+        const cols = long ? 1 : f.options.length > 4 ? 3 : 2;
+        return `<div class="f"><span class="f-label">${esc(f.label)}${f.type === "radio" ? "（圈一個）" : ""}</span><div class="opts" style="--cols:${cols}">${f.options.map((o) => `<div class="opt"><b>${mark}</b><span>${esc(o)}</span></div>`).join("")}</div></div>`;
+      }
+      case "rows": case "fixedrows": {
+        const fixed = f.type === "fixedrows";
+        const count = fixed ? f.rowLabels.length : f.n;
+        const w = WEIGHTS[f.id] || f.cols.map(() => 1);
+        const total = w.reduce((a, b) => a + b, 0);
+        const labelW = fixed ? Math.min(44, Math.max(...f.rowLabels.map((l) => l.length)) * 3.4 + 5) : 7;
+        const colgroup = `<colgroup><col style="width:${labelW}mm">${f.cols.map((_, i) => `<col style="width:${(w[i] || 1) / total * 100}%">`).join("")}</colgroup>`;
+        const head = `<thead><tr><th>${fixed ? "" : "#"}</th>${f.cols.map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead>`;
+        const body = Array.from({ length: count }, (_, r) => `<tr><th class="rl">${esc(fixed ? f.rowLabels[r] : r + 1)}</th>${f.cols.map((_, c) => `<td>${esc(exCell(f.ex, r, c))}</td>`).join("")}</tr>`).join("");
+        return `<div class="f"><span class="f-label">${esc(f.label)}</span><table>${colgroup}${head}<tbody>${body}</tbody></table></div>`;
+      }
+      default: return "";
+    }
+  }
+
+  function sheetHtml(s) {
+    const wide = WIDE.includes(s.id);
+    return `<div class="scroller"><article class="sheet${wide ? " wide" : ""}" data-sheet="${s.id}">
+      <header class="s-head">
+        <div class="s-kicker"><span>P3-03 Salimpo 山海之聲 Podcast</span><span>${esc(s.lesson)}</span></div>
+        <h2 class="s-title"><span class="n">學習單 ${s.n}</span>${esc(s.title)}${state.example ? `<span class="s-badge">範例版・老師用</span>` : ""}</h2>
+        <div class="s-who"><span>組別 <em class="box">☐1　☐2　☐3　☐4</em></span><span>姓名 <i></i></span><span>日期 <i style="min-width:24mm"></i></span></div>
+      </header>
+      ${s.fields.map(field).join("")}
+      <footer class="s-foot"><span>寧埔國小 山海專題・高年級</span><span>學習單 ${s.n}／${C.WORKSHEETS.length}</span></footer>
+    </article></div>`;
+  }
+
+  function render() {
+    $("#stack").innerHTML = C.WORKSHEETS.map(sheetHtml).join("");
+    document.querySelectorAll(".scroller").forEach((el, i) => { el.hidden = !state.picked.has(C.WORKSHEETS[i].id); });
+    const firstShown = document.querySelector(".scroller:not([hidden])"); if (firstShown) firstShown.classList.add("first");
+    $("#mode-blank").setAttribute("aria-pressed", String(!state.example));
+    $("#mode-example").setAttribute("aria-pressed", String(state.example));
+    document.title = state.example ? "山海之聲學習單列印版（範例）" : "山海之聲學習單列印版";
+  }
+
+  $("#picks").innerHTML = C.WORKSHEETS.map((s) => `<label for="pick-${s.id}"><input type="checkbox" id="pick-${s.id}" data-id="${s.id}" checked>${s.n} ${esc(s.title)}</label>`).join("");
+  $("#picks").addEventListener("change", (e) => { const box = e.target.closest("[data-id]"); if (!box) return; if (box.checked) state.picked.add(box.dataset.id); else state.picked.delete(box.dataset.id); render(); });
+  $("#mode-blank").addEventListener("click", () => { state.example = false; history.replaceState(null, "", "#blank"); render(); });
+  $("#mode-example").addEventListener("click", () => { state.example = true; history.replaceState(null, "", "#example"); render(); });
+  $("#print-btn").addEventListener("click", () => window.print());
+  window.addEventListener("hashchange", () => { state.example = location.hash === "#example"; render(); });
+  render();
+})();
+</script>
+</body>
+</html>
