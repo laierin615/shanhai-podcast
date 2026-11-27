@@ -126,7 +126,7 @@
     { id: "school", label: "全校發表會播放" },
     { id: "web", label: "可以放到網路" },
   ];
-  const TABOO = ["會不會碰到禁忌、祭儀或靈觀？", "會不會問到別人的隱私或家裡的事？", "長輩不想回答時，我要怎麼說？"];
+  const TABOO = ["會不會問到別人的隱私或家裡的事？", "長輩不想回答時，我要怎麼說？"];
   const THREE_Q = [
     { amis: "cimaay", zh: "誰寫的？", hint: "作者、單位、受訪的長輩" },
     { amis: "mihecaan", zh: "哪一年？", hint: "出版年、網頁日期、訪談日期" },
@@ -304,7 +304,7 @@
       { type: "fixedrows", id: "rundown", label: "節目流程表", rowLabels: RUNDOWN.map((r) => `${r.time} ${r.seg}`), cols: ["誰說", "內容重點"], ex: [["製作人", "Apple Loops 輕快音樂"], ["主持人", "問候、節目名稱、核心問題"], ["主持人＋研究員", "3 則資料卡（第 4 節補）"], ["主持人＋耆老", "6–8 題訪談"], ["全組", "回答核心問題"], ["主持人", "Aray、片尾"]] },
       { type: "area", id: "opening", label: "開場稿（1 分鐘內念完）", ex: EXAMPLES.opening },
       { type: "rows", id: "interview", label: "訪談大綱（開場—經驗—細節—延伸—收尾）", cols: ["類型", "題目（用經驗式問法）", "追問句", "要先請示？"], n: 8, ex: EXAMPLES.interview.map((r) => [r.type, r.q, r.type === "延伸" ? "為什麼會這樣？" : "", ""]) },
-      { type: "checks", id: "taboo", label: "禁忌題自我審查（每題都想過）", options: TABOO },
+      { type: "checks", id: "taboo", label: "訪談題自我檢查（每題都想過）", options: TABOO },
       { type: "area", id: "learned", label: "我們學到的事（錄音後再寫）" },
       { type: "area", id: "closing", label: "結尾稿", ex: EXAMPLES.closing },
     ] },

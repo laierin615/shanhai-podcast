@@ -80,7 +80,7 @@
     { html: S.compare({ kicker: kick(D1, 2), title: "訪談題：考問式 → 經驗式", left: { h: "考問式（像考試）", d: C.EXAMPLES.questionsBad }, right: { h: "經驗式（請長輩說故事）", d: C.EXAMPLES.questionsGood } }) },
     { html: S.cards({ kicker: kick(D1, 2), title: "訪談大綱五段（範例）", cols: 5, cards: C.EXAMPLES.interview.map((r) => ({ tag: r.type, h: r.q })) }), note: "從 P3-02 的存疑清單和第 1 節的三個問題挑 6–8 題。" },
     { html: S.cards({ kicker: kick(D1, 2), title: "追問句型卡", cols: 3, cards: C.FOLLOW_UPS.map((f) => ({ tag: f.type, h: f.q })) }) },
-    { html: S.list({ kicker: kick(D1, 2), title: "每一題都想三件事", big: true, items: C.TABOO, aside: `<p class="s-aside-h">碰到禁忌、祭儀</p><p>先標記「要先請示」，錄音那天問長輩可不可以問。</p>` }) },
+    { html: S.list({ kicker: kick(D1, 2), title: "每一題都想兩件事", big: true, items: C.TABOO }) },
     { html: S.tool(kick(D1, 2), "pagesCard", [0, 1, 2]), note: "邀請卡要寫五件事；本週內親送給長輩。" },
     { html: S.list({ kicker: kick(D1, 2), title: "下課前", big: true, items: ["開場稿念一次，1 分鐘內念完", "老師檢查訪談題", "這星期把邀請卡送給長輩", "12/4 要去圖書室找資料"] }) },
   ] };
