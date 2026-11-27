@@ -81,8 +81,8 @@
       todo: ["聲音大挑戰", "GarageBand 開新節目", "錄開場、小知識、結尾", "三請示和公開層級", "模擬訪談一輪"] },
     { n: 6, label: "第 6 節", title: "耆老來賓錄音日", apps: ["GarageBand", "語音備忘錄"], ws: "ws5", guide: ["voiceMemo", "airdrop"],
       todo: ["族語問候迎接長輩", "錄音前先請示", "訪談錄音 20 分鐘", "回放檢查、AirDrop 備份", "用 radiw 和 Aray 致謝"] },
-    { n: 7, label: "第 7 節", title: "剪輯後製", apps: ["GarageBand"], ws: "ws6", guide: ["gbEdit", "gbMusic"],
-      todo: ["回放錄音日的開頭", "匯入錄音、排好順序", "剪掉不要的地方", "加片頭片尾音樂", "匯出初版"] },
+    { n: 7, label: "第 7 節", title: "剪輯後製", apps: ["GarageBand"], ws: "ws6", guide: ["gbEdit", "gbTheme", "gbMusic"],
+      todo: ["回放錄音日的開頭", "匯入錄音、排好順序", "剪掉不要的地方", "用 Apple Loops 做主題曲", "主題曲放進片頭片尾", "匯出初版"] },
     { n: 8, label: "第 8 節", title: "封面海報｜試聽修訂｜上傳", apps: ["Pages", "照片", "GarageBand", "Google 雲端硬碟"], ws: "ws7", guide: ["cover", "gbExport", "driveUpload"],
       todo: ["做正方形封面", "做 A4 發表會海報", "交換試聽、修改", "匯出完成版", "四件成果上傳雲端"] },
     { n: 9, label: "第 9–10 節", title: "山海之聲首播發表會", apps: ["投影", "Padlet"], ws: "ws8", guide: ["padlet"],
@@ -91,7 +91,7 @@
 
   /** 一集節目的流程 */
   const RUNDOWN = [
-    { time: "00:00", len: "15 秒", seg: "片頭音樂", who: "製作人", tip: "Apple Loops 音樂慢慢變大聲" },
+    { time: "00:00", len: "15 秒", seg: "片頭音樂", who: "製作人", tip: "放自己用 Apple Loops 做的主題曲" },
     { time: "00:15", len: "1 分鐘", seg: "開場", who: "主持人", tip: "Nga'ay ho! 節目名稱、自我介紹、這一集想知道什麼" },
     { time: "01:15", len: "3 分鐘", seg: "山海小知識", who: "主持人＋研究員", tip: "3 則資料卡，每則說「根據誰、哪一年」" },
     { time: "04:15", len: "6–8 分鐘", seg: "來賓訪談", who: "主持人＋耆老", tip: "介紹長輩，用訪談小卡提問、追問" },
@@ -209,8 +209,17 @@
       { t: "點不要的那一段，選「刪除」。長輩說不公開的段落一定要刪。", m: ["gb-split", "delete"] },
       { t: "拖聲波的左右邊緣，修掉開頭和結尾的空白；按住拖曳可以換順序。", m: ["gb-tracks", "edge"] },
     ] },
-    gbMusic: { app: "GarageBand", tone: "dark", title: "加片頭音樂、調音量", when: "01/08 第 7 節", steps: [
-      { t: "點「迴圈」按鈕 →「Apple Loops」，點一下試聽，喜歡就拖到新的軌道。", m: ["gb-loops", "apple"] },
+    gbTheme: { app: "GarageBand", tone: "dark", title: "用 Apple Loops 做主題曲", when: "01/08 第 7 節", warn: "Apple Loops 是 GarageBand 內建的音樂，可以放進自己做的作品。網路上下載的歌不能用。", steps: [
+      { t: "開一首新的樂曲（跟開新節目一樣選「錄音機」），改名「第X組_主題曲」。點右上角「迴圈」→「Apple Loops」。", m: ["gb-loops", "apple"] },
+      { t: "用「樂器」找鼓、貝斯、鋼琴或吉他；用「描述」挑「開心」「輕鬆」。點一下就能試聽。", m: ["gb-loopbrowse", "filter"] },
+      { t: "挑三層：節奏（鼓）＋低音（貝斯）＋旋律（鋼琴或吉他）。各拖到一條空白軌道，都從第 1 小節開始。", m: ["gb-layers", "stack"] },
+      { t: "點一下片段 →「迴圈」，讓它一直重複；長度拉到 8 小節（大約 15 秒）。", m: ["gb-split", "loopitem"] },
+      { t: "再加一條「錄音機」軌道，全組一起喊：「Nga'ay ho! 這裡是山海之聲！」", m: ["gb-layers", "shout"] },
+      { t: "點「設定」→ 打開「淡出」，結尾就會自己變小聲。", m: ["gb-settings", "fade"] },
+      { t: "「我的樂曲」→ 長按主題曲 →「分享」→「歌曲」→ 儲存到「檔案」。", m: ["gb-share", "song"] },
+    ] },
+    gbMusic: { app: "GarageBand", tone: "dark", title: "放進主題曲、調音量", when: "01/08 第 7 節", steps: [
+      { t: "回到節目，點「迴圈」→「檔案」，找到「第X組_主題曲」，拖到節目最前面；片尾再拖一次。", m: ["gb-loops", "files"] },
       { t: "片頭、片尾各 10–15 秒。用同學唱的 radiw 之前，要先問可不可以公開。", m: ["gb-tracks", "music"] },
       { t: "把軌道左邊往右拉，出現音量條。說話要比音樂大聲。", m: ["gb-mixer", "vol"] },
     ] },

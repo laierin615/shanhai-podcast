@@ -45,6 +45,16 @@
     groups: (kicker, title = "四組名單與角色") => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-cards" style="--cols:4">${C.GROUPS.map((g) => `<div class="s-card s-group"><span class="s-tag">${g.label}</span><h3>${g.members.join("、")}</h3>${g.note ? `<p>${g.note}</p>` : ""}</div>`).join("")}</div><div class="s-roles">${C.ROLES.map((r) => `<span><b>${r.name}</b>${r.job}</span>`).join("")}</div></div>`,
     radio: (kicker, title, focus) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-radio-grid"><figure class="s-photo"><img src="${C.RADIO.alian.photo.src}" alt="${C.RADIO.alian.photo.alt}"><figcaption>${C.RADIO.alian.photo.caption}</figcaption></figure><div class="s-radio-col"><div class="s-card s-radio"><span class="s-tag">${C.RADIO.alian.date}</span><h3>${C.RADIO.alian.station}${C.RADIO.alian.program}</h3><p>學長姐到台北的錄音室，介紹專輯《生活的詩》</p><div class="s-plays"><a class="s-play" data-link="radioAlian" data-label="▶ 播放節目" href="#" target="_blank" rel="noopener">▶ 播放節目</a><a class="s-play s-play-2" data-link="radioAlbum" data-label="♪ 專輯歌曲" href="#" target="_blank" rel="noopener">♪ 專輯歌曲</a><a class="s-play s-play-3" data-link="radioReel" data-label="◎ IG 短片" href="#" target="_blank" rel="noopener">◎ IG 短片</a></div></div><div class="s-card s-radio"><span class="s-tag">台東</span><h3>臺東教育電台</h3><p>學長姐在台東接受電台訪問</p><a class="s-play" data-link="radioTaitung" href="#" target="_blank" rel="noopener">▶ 播放片段</a></div></div></div><p class="s-note-line">${focus}</p></div>`,
     roadmap: (kicker) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">五個星期五，做出一集節目</h2><div class="s-road">${C.SESSIONS.map((s, i) => `<div class="s-stop ${i === C.SESSIONS.length - 1 ? "s-stop-end" : ""}"><span class="s-date">${s.date}</span><b>${s.theme}</b><small>${s.lessons.map((n) => lessonOf(n).label).join("・")}</small></div>`).join("")}</div></div>`,
+    layers: (kicker) => {
+      const L = [
+        ["🥁", "節奏", "鼓", "讓人想跟著點頭", "s-l0", 4],
+        ["🎸", "低音", "貝斯", "把聲音墊厚", "s-l1", 4],
+        ["🎹", "旋律", "鋼琴或吉他", "讓人記得", "s-l2", 4],
+        ["📣", "喊聲", "全組一起", "Nga'ay ho! 這裡是山海之聲！", "s-l3", 0],
+      ];
+      const row = ([ico, h, who, d, cls, n]) => `<div class="s-lrow"><div class="s-lname ${cls}"><span class="s-ico" aria-hidden="true">${ico}</span><span><b>${h}</b><small>${who}</small></span></div><div class="s-lbar">${n ? Array.from({ length: n }, (_, i) => `<span class="s-lblk ${cls}">${i ? "↻" : "Loop"}</span>`).join("") : `<span class="s-lblk s-lshout ${cls}">${d}</span>`}</div>${n ? `<div class="s-ldesc">${d}</div>` : ""}</div>`;
+      return `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">主題曲配方：四層疊起來</h2><div class="s-layers">${L.map(row).join("")}<div class="s-lrow s-lruler"><div></div><div class="s-lscale"><span>第 1 小節</span><span>8 小節 ≈ 15 秒</span><span class="s-lfade">淡出 ▸</span></div><div></div></div></div></div>`;
+    },
     cover: (kicker, title, items) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-split"><ul class="s-list">${li(items)}</ul><div class="s-covers"><div class="s-cover-big">${M.cover(C.EXAMPLES.showName, "Salimpo 山海之聲・第2組")}</div><div class="s-cover-small">${M.cover(C.EXAMPLES.showName, "第2組")}<small>郵票大小也看得清楚</small></div></div></div></div>`,
   };
 
@@ -125,6 +135,9 @@
     { html: S.list({ kicker: kick(D4, 7), title: "剪輯四件事", big: true, items: ["去頭去尾", "拿掉太長的停頓", "加片頭片尾音樂", "說話比音樂大聲"], aside: `<p class="s-aside-h">一定要做</p><p>長輩說不能公開的段落，<b class="s-red">一定刪掉</b>（看學習單 5、6 記的時間）</p>` }) },
     { html: S.tool(kick(D4, 7), "gbEdit", [0, 1, 2]) },
     { html: S.tool(kick(D4, 7), "gbEdit", [3, 4]) },
+    { html: S.layers(kick(D4, 7)), note: "先全班一起聽 3 種不同的鼓 Loop，讓學生說說哪個像海、哪個像田。每組 15 分鐘完成；片頭片尾用同一首，聽眾一聽就知道是你們的節目。" },
+    { html: S.tool(kick(D4, 7), "gbTheme", [0, 1, 2, 3]) },
+    { html: S.tool(kick(D4, 7), "gbTheme", [4, 5, 6]) },
     { html: S.tool(kick(D4, 7), "gbMusic", [0, 1, 2]) },
     { html: S.title({ kicker: kick(D4, 8), title: "做出門面，準備上線", sub: "今天要完成：封面、海報、試聽修訂、上傳四件成果", chips: ["Pages", "照片", "雲端硬碟", "學習單 7"] }) },
     { html: S.cover(kick(D4, 8), "好封面四要素", ["大大的節目名稱", "一個族語詞", "一張自己拍的主圖", "組別", "郵票測試：縮小還看得懂嗎？"]) },

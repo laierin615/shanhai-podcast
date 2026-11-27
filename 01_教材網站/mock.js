@@ -302,7 +302,7 @@
       svg += R(110, 150, 300, 30, "#111", 8);
       const items = ["剪下", "拷貝", "刪除", "迴圈", "分割", "重新命名"];
       const a = {};
-      items.forEach((it, i) => { const x = 116 + i * 48; svg += T(x + 20, 170, it, { size: 11, fill: "#fff", anchor: "middle" }); if (it === "分割") a.split = [x + 20, 165, 18]; if (it === "刪除") a.delete = [x + 20, 165, 18]; });
+      items.forEach((it, i) => { const x = 116 + i * 48; svg += T(x + 20, 170, it, { size: 11, fill: "#fff", anchor: "middle" }); if (it === "分割") a.split = [x + 20, 165, 18]; if (it === "刪除") a.delete = [x + 20, 165, 18]; if (it === "迴圈") a.loopitem = [x + 20, 165, 18]; });
       return { svg: t.svg + svg, a: { ...t.a, ...a } };
     },
     "gb-loops": () => {
@@ -314,6 +314,50 @@
       tabs.forEach(([id, label]) => { const p = pill(x, 58, label, { fill: id === "files" ? "#ffd60a" : "#e2e2e6", color: "#111", size: 10 }); svg += p.svg; a[id] = [p.cx, p.cy, Math.max(14, p.w / 2)]; x += p.w + 4; });
       ["第2組_耆老訪談_備份", "第2組_開場", "第2組_小知識"].forEach((n, i) => { svg += R(280, 92 + i * 36, 178, 30, "#fff", 6) + T(290, 111 + i * 36, n, { size: 10 }); });
       svg += R(280, 214, 178, 30, "#d9e8ff", 6) + T(369, 233, "從「檔案」App 瀏覽項目", { size: 10, anchor: "middle", fill: "#1a4fbf" });
+      return { svg: t.svg + svg, a: { ...t.a, ...a } };
+    },
+    "gb-loopbrowse": () => {
+      const t = gbTracks({ noRegion: true });
+      let svg = R(232, 48, 236, 280, "#f2f2f4", 0) + R(232, 316, 236, 12, "#f2f2f4", 12);
+      const a = {};
+      let x = 240;
+      [["ins", "樂器"], ["genre", "類型"], ["desc", "描述"]].forEach(([id, label]) => { const p = pill(x, 56, label, { fill: id === "ins" ? "#ffd60a" : "#e2e2e6", color: "#111", size: 10 }); svg += p.svg; a[id] = [p.cx, p.cy, Math.max(14, p.w / 2)]; x += p.w + 4; });
+      x = 240;
+      ["鼓", "貝斯", "鋼琴", "吉他", "開心", "輕鬆"].forEach((c, i) => { const p = pill(x, 84 + Math.floor(i / 4) * 26, c, { fill: i === 0 || i === 4 ? "#2bb3a3" : "#fff", color: i === 0 || i === 4 ? "#fff" : "#333", size: 10 }); svg += p.svg; x = i === 3 ? 240 : x + p.w + 4; });
+      a.filter = [300, 97, 40];
+      [["Sunny Beat 鼓", "120"], ["Island Bass 貝斯", "120"], ["Morning Piano 鋼琴", "120"]].forEach(([n, bpm], i) => {
+        const y = 144 + i * 40;
+        svg += R(240, y, 220, 34, "#fff", 6) + C(258, y + 17, 10, i === 0 ? "#2bb3a3" : "#e2e2e6") + `<path d="M255 ${y + 11} L263 ${y + 17} L255 ${y + 23} Z" fill="${i === 0 ? "#fff" : "#555"}"/>` + T(276, y + 21, n, { size: 10 }) + T(450, y + 21, bpm, { size: 9, fill: "#888", anchor: "end" });
+      });
+      a.preview = [258, 161, 14];
+      svg += T(350, 280, "名字是示意，挑聽起來開心的就好", { size: 9, fill: "#888", anchor: "middle" });
+      return { svg: t.svg + svg, a: { ...t.a, ...a } };
+    },
+    "gb-layers": () => {
+      const c = gbControl();
+      let svg = R(12, 48, 456, 280, "#1c1c1e", 0) + R(12, 316, 456, 12, "#1c1c1e", 12) + R(96, 50, 372, 14, "#2c2c30", 0);
+      for (let i = 0; i < 8; i += 1) svg += T(100 + i * 44, 61, String(i + 1), { size: 9, fill: "#9a9aa0" });
+      const rows = [["鼓", "#f59e0b"], ["貝斯", "#22c55e"], ["鋼琴", "#7a6cf2"], ["全組喊聲", "#2bb3a3"]];
+      rows.forEach(([name, color], i) => {
+        const y = 68 + i * 62;
+        svg += R(12, y, 82, 56, "#2c2c30", 0) + T(20, y + 22, name, { size: 10, fill: "#d8d8dc" }) + R(96, y, 372, 56, i % 2 ? "#202024" : "#232327", 0);
+        if (i < 3) { for (let k = 0; k < 4; k += 1) svg += R(100 + k * 88, y + 6, 86, 44, color, 6) + T(104 + k * 88, y + 20, k ? "↻" : "", { size: 10, fill: "#111" }); }
+        else svg += R(144, y + 6, 120, 44, color, 6) + wave(148, y + 12, 112, 32, "#0b3b36", 1.7);
+      });
+      svg += T(350, 324, "四條都從第 1 小節開始，長度 8 小節", { size: 9, fill: "#bbb", anchor: "middle" });
+      return { svg: c.svg + svg, a: { ...c.a, stack: [60, 160, 40], loopext: [450, 90, 16], shout: [204, 280, 34] } };
+    },
+    "gb-settings": () => {
+      const t = gbTracks();
+      let svg = R(250, 56, 210, 230, "#f2f2f4", 12) + T(266, 82, "歌曲設定", { size: 13, weight: 700 });
+      const a = {};
+      [["速度", "120"], ["調", "C 大調"], ["淡出", ""]].forEach(([n, v], i) => {
+        const y = 100 + i * 44;
+        svg += R(262, y, 186, 36, "#fff", 8) + T(274, y + 23, n, { size: 12 });
+        if (n === "淡出") { svg += R(392, y + 6, 44, 24, "#34c759", 12) + C(424, y + 18, 10, "#fff"); a.fade = [414, y + 18, 22]; }
+        else { svg += T(436, y + 23, v, { size: 11, fill: "#888", anchor: "end" }); if (n === "速度") a.tempo = [400, y + 18, 30]; }
+      });
+      svg += T(355, 260, "打開淡出，結尾自己變小聲", { size: 10, fill: "#888", anchor: "middle" });
       return { svg: t.svg + svg, a: { ...t.a, ...a } };
     },
     "gb-mixer": () => {

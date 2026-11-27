@@ -514,6 +514,21 @@ body { background-color: var(--bg); background-image: radial-gradient(circle at 
 .s-rtime { font-family: var(--font-mono); font-size: 15px; color: var(--muted); }
 .s-r0, .s-r5 { background: var(--hill-soft); } .s-r1, .s-r2, .s-r4 { background: var(--sea-soft); } .s-r3 { background: var(--red-soft); }
 .s-rbar .s-r0, .s-rbar .s-r5 { background: #8fdc9c; } .s-rbar .s-r1, .s-rbar .s-r2, .s-rbar .s-r4 { background: #6fd3de; } .s-rbar .s-r3 { background: #ff7a6e; }
+
+/* 主題曲配方圖 */
+.s-layers { display: grid; gap: 12px; flex: 1; align-content: start; }
+.s-lrow { display: grid; grid-template-columns: 230px minmax(0, 1fr) 200px; gap: 16px; align-items: center; }
+.s-lname { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: center; padding: 8px 12px 8px 8px; border-radius: 18px; color: var(--slide-ink); }
+.s-lname b { display: block; font-family: var(--font-display); font-size: 30px; line-height: 1.1; }
+.s-lname small { font-size: 18px; color: var(--muted); }
+.s-lbar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.s-lblk { height: 64px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; font-weight: 700; color: var(--slide-ink); }
+.s-lshout { grid-column: 1 / span 2; font-size: 22px; padding-inline: 12px; }
+.s-ldesc { font-size: 22px; line-height: 1.35; color: var(--slide-ink); }
+.s-l0 { background: #ffd98a; } .s-l1 { background: #9fe3ae; } .s-l2 { background: #c7c1ff; } .s-l3 { background: #8fe0e8; }
+.s-lname.s-l0 { background: var(--sun-soft); } .s-lname.s-l1 { background: var(--hill-soft); } .s-lname.s-l2 { background: #ecebff; } .s-lname.s-l3 { background: var(--sea-soft); }
+.s-lscale { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 17px; color: var(--muted); border-top: 3px solid var(--slide-ink); padding-top: 6px; }
+.s-lfade { color: var(--red); }
 </style>
 
 <header class="topbar">

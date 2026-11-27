@@ -263,7 +263,7 @@
   function renderGuide() {
     const total = C.RUNDOWN.reduce((s, r) => s + ({ "15 秒": 0.25, "1 分鐘": 1, "3 分鐘": 3, "6–8 分鐘": 7, "1–2 分鐘": 1.5, "30 秒": 0.5 }[r.len] || 1), 0);
     const bar = C.RUNDOWN.map((r) => { const v = { "15 秒": 0.25, "1 分鐘": 1, "3 分鐘": 3, "6–8 分鐘": 7, "1–2 分鐘": 1.5, "30 秒": 0.5 }[r.len] || 1; return `<div class="seg" style="flex:${v}"><b>${r.seg}</b><small>${r.len}</small></div>`; }).join("");
-    const toolOrder = ["freeform", "notes", "pagesScript", "pagesCard", "notesScan", "padlet", "safari", "gbNew", "voiceMemo", "airdrop", "gbEdit", "gbMusic", "cover", "gbExport", "driveUpload"];
+    const toolOrder = ["freeform", "notes", "pagesScript", "pagesCard", "notesScan", "padlet", "safari", "gbNew", "voiceMemo", "airdrop", "gbEdit", "gbTheme", "gbMusic", "cover", "gbExport", "driveUpload"];
     const E = C.EXAMPLES;
 
     $("#guide-index").innerHTML = [["what", "什麼是 Podcast"], ["lessons", "每次上課要做什麼"], ["tools", "iPad 圖文教學"], ...toolOrder.map((k) => [`tool-${k}`, `　${C.TOOLS[k].title}`]), ["examples", "範例櫃"], ["words", "族語小卡"]]
