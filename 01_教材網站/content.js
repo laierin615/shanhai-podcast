@@ -8,6 +8,9 @@
   /** 網站公開網址（GitHub Pages），總覽頁的 QR Code 用這個 */
   const SITE = { url: "https://laierin615.github.io/shanhai-podcast/" };
 
+  /** Padlet 資料牆（主題池＋各組資料欄），學生免登入可張貼，老師審核後才公開 */
+  const PADLET = { url: "https://padlet.com/nbps14467101/p3-03-s025udlxjilxiqom10ku" };
+
   const DRIVE = {
     root: "https://drive.google.com/drive/folders/1BUgyPjOAowk7Y-_7wGaOGINEq8jVu_a-",
     teacher: "https://drive.google.com/drive/folders/12ixXCSANxw7aB7kQnrN_JcsVVjKD38wS",
@@ -20,8 +23,8 @@
   };
 
   const DOCS = [
-    { label: "教案（五週十節）", url: "https://claude.ai/artifact/N6KWewgzM1K8ss8jppAE2n" },
-    { label: "協同教師簡案", url: "https://claude.ai/artifact/9VW9Jew19BkgXu9diWCCSH" },
+    { label: "教案（五週十節）", url: "https://github.com/laierin615/shanhai-podcast/blob/main/02_%E6%95%99%E6%A1%88%E8%88%87%E7%B0%A1%E6%A1%88/P3-03%20%E5%B1%B1%E6%B5%B7%E4%B9%8B%E8%81%B2%20Podcast%20%E6%9C%9F%E6%9C%AB%E5%B0%88%E9%A1%8C%20%E6%95%99%E6%A1%88%EF%BC%88%E4%BA%94%E9%80%B1%E5%8D%81%E7%AF%80%EF%BC%89.md" },
+    { label: "協同教師簡案", url: "https://github.com/laierin615/shanhai-podcast/blob/main/02_%E6%95%99%E6%A1%88%E8%88%87%E7%B0%A1%E6%A1%88/P3-03%20%E5%B1%B1%E6%B5%B7%E4%B9%8B%E8%81%B2%20Podcast%20%E5%8D%94%E5%90%8C%E6%95%99%E5%B8%AB%E7%B0%A1%E6%A1%88.md" },
     { label: "P3 山海專題高年級詳案（P3-01～P3-02）", url: "https://docs.google.com/document/d/1Fnd8p5EmMy4TRQwWkTswbYtIjXYu-qEU1HGcfhx4yGA/edit" },
     { label: "雲端成果資料夾", url: DRIVE.root },
     { label: "阿美語萌典", url: "https://amis.moedict.tw/" },
@@ -388,7 +391,7 @@
   ];
 
   global.COURSE = {
-    SITE, APPS, RADIO, DRIVE, DOCS, GROUPS, SESSIONS, LESSONS, RUNDOWN, ROLES, TOPICS, RULERS, RADAR, ASKS, FOURTH_ASK, LEVELS, TABOO,
+    SITE, PADLET, APPS, RADIO, DRIVE, DOCS, GROUPS, SESSIONS, LESSONS, RUNDOWN, ROLES, TOPICS, RULERS, RADAR, ASKS, FOURTH_ASK, LEVELS, TABOO,
     THREE_Q, FOLLOW_UPS, COVER_SPEC, TOOLS, SHARE_METHOD, RUBRIC, LEVEL_NAMES, VOCAB, EXAMPLES, WORKSHEETS, PREP, CONSENT_TEXT,
   };
 })(window);

@@ -86,7 +86,7 @@ Nov 23, 2026 · @erin lai
 
 ## 相關連結
 
-- [P3-03 山海之聲 Podcast 期末專題 教案（五週十節）](https://claude.ai/artifact/N6KWewgzM1K8ss8jppAE2n)：每節詳細流程、評量規準、授權同意書
+- [P3-03 山海之聲 Podcast 期末專題 教案（五週十節）](P3-03%20%E5%B1%B1%E6%B5%B7%E4%B9%8B%E8%81%B2%20Podcast%20%E6%9C%9F%E6%9C%AB%E5%B0%88%E9%A1%8C%20%E6%95%99%E6%A1%88%EF%BC%88%E4%BA%94%E9%80%B1%E5%8D%81%E7%AF%80%EF%BC%89.md)：每節詳細流程、評量規準、授權同意書
 - [P3 山海專題高年級詳案（P3-01～P3-02）](https://docs.google.com/document/d/1Fnd8p5EmMy4TRQwWkTswbYtIjXYu-qEU1HGcfhx4yGA/edit)
 - [雲端成果資料夾：P3-03 山海之聲 Podcast 成果（115上）](https://drive.google.com/drive/folders/1BUgyPjOAowk7Y-_7wGaOGINEq8jVu_a-)
 - [阿美語萌典](https://amis.moedict.tw/)

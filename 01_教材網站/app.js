@@ -92,7 +92,7 @@
 
   /* ---------- 平台能力與共享設定 ---------- */
   const platform = { db: null, assets: null, user: null, downloads: null, canEdit: false, ready: false };
-  const SETTING_DEFAULTS = { folderUrl: C.DRIVE.root, handoutUrl: C.DRIVE.teacher, padletUrl: "", radioAlianUrl: C.RADIO.alian.video, radioAlbumUrl: C.RADIO.alian.album, radioReelUrl: C.RADIO.alian.reel, radioTaitungUrl: "" };
+  const SETTING_DEFAULTS = { folderUrl: C.DRIVE.root, handoutUrl: C.DRIVE.teacher, padletUrl: C.PADLET.url, radioAlianUrl: C.RADIO.alian.video, radioAlbumUrl: C.RADIO.alian.album, radioReelUrl: C.RADIO.alian.reel, radioTaitungUrl: "" };
   const shared = { settings: store.read("p303:settings", {}), groups: {}, loaded: false, error: "" };
   const setting = (key) => (shared.settings && shared.settings[key]) || SETTING_DEFAULTS[key];
 
