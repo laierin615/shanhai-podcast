@@ -66,7 +66,7 @@
     { html: S.radio(kick(D1, 1), "先聽學長姐上電台", "邊聽邊想：沒有畫面，你怎麼知道他們在哪裡、在做什麼？"), note: "播放 1–2 分鐘，問：聽得出是誰嗎？主持人怎麼介紹的？" },
     { html: S.rundown(kick(D1, 1)), note: "說明一集節目要有的六段。" },
     { html: S.groups(kick(D1, 1)), note: "各組決定每人負責的兩個角色。" },
-    { html: S.cards({ kicker: kick(D1, 1), title: "主題池：都要接回上過的民族課程", cols: 4, cards: C.TOPICS.map((t) => ({ tag: t.word, h: t.title, d: t.link + (t.caution ? "<br><b class=\"s-red\">※先列存疑，問長輩能不能錄</b>" : "") })) }), note: "主題可以自己想，但要說得出跟哪一課有關。" },
+    { html: S.cards({ kicker: kick(D1, 1), title: "主題池：都要接回上過的民族課程", cols: 4, cards: C.TOPICS.map((t) => ({ tag: t.word, h: t.title, d: t.link })) }), note: "主題可以自己想，但要說得出跟哪一課有關。" },
     { html: S.tool(kick(D1, 1), "freeform", [0, 1, 2]) },
     { html: S.list({ kicker: kick(D1, 1), title: "選題三把尺", big: true, items: C.RULERS, aside: `<p class="s-aside-h">三把尺都過</p><p>便利貼改成<b class="s-red">紅色</b>，就是你們的主題</p>` }) },
     { html: S.tool(kick(D1, 1), "freeform", [3, 4]) },

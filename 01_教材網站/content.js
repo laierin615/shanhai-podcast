@@ -54,8 +54,6 @@
   const LISTEN = [
     { show: "母語 On Air", ep: "輕鬆學族語｜阿美族語 09｜今天一起學：運動", by: "國立教育廣播電臺", len: "約 2 分鐘", why: "族語老師教一個詞 onto（運動），短短一集一個主題。",
       url: "https://podcasts.apple.com/tw/podcast/id1626803759?i=1000743240881" },
-    { show: "打開小耳朵", ep: "兒童科普｜i動物進行式：受歡迎的動物明星～認識小丑魚", by: "國立教育廣播電臺", len: "", why: "給小朋友聽的節目，聽聽主持人怎麼開場、怎麼問問題。",
-      url: "https://podcasts.apple.com/tw/podcast/id1582737271?i=1000672836209" },
     { show: "i loma' 語你一起", ep: "（選一集）族語家庭的故事", by: "原住民族語言研究發展基金會", len: "", why: "有主持人也有來賓，最像我們要做的訪問節目。",
       url: "https://podcasts.apple.com/tw/podcast/id1595550526" },
   ];
@@ -112,8 +110,8 @@
     { word: "kamamit", title: "田埂上消失的酸甜", link: "P3-01 文健站分享 kamamit" },
     { word: "panay・toko", title: "Awos 農場的友善田", link: "P3-02 Awos 農場踏查" },
     { word: "talo'an", title: "田邊的無牆房子", link: "P3-02 工寮、傳統建築" },
-    { word: "radiw", title: "長輩唱給我們聽的歌", link: "山海藝音 祭儀歌謠", caution: true },
-    { word: "riyar", title: "潮間帶的規矩", link: "山海生活 潮間帶", caution: true },
+    { word: "radiw", title: "長輩唱給我們聽的歌", link: "山海藝音 祭儀歌謠" },
+    { word: "riyar", title: "潮間帶的規矩", link: "山海生活 潮間帶" },
     { word: "野菜藥草", title: "長輩的餐桌", link: "山海生活 野菜與藥草" },
     { word: "toron", title: "一起做、一起分", link: "P3-01 創意 toron" },
     { word: "ngangan", title: "名字裡的故事", link: "山海人文 族名與地名" },
