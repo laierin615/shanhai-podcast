@@ -34,6 +34,7 @@
     { html: S.title({ kicker: "山海專題・高年級・P3-03 期末專題", title: "Salimpo 山海之聲", sub: "每組做一集 10–15 分鐘的 Podcast，請一位耆老當來賓", chips: ["5 個星期五", "10 節課", "4 組", "1/15 首播"] }), note: "第一次上課開場。" },
     { html: S.radio("我們的學長姐上過電台", "學長姐當過受訪者，這次換你們當主持人", "這次換你們自己設計節目、自己訪問長輩。"), note: "片段連結在「成果上傳」頁設定（電台片段）。" },
     { html: S.list({ kicker: "先認識一下", title: "什麼是 Podcast？", big: true, items: ["用耳朵聽的節目", "一集講一個主題", "有主持人，也常有來賓", "手機、平板隨時都能聽"], aside: `<p class="s-aside-h">跟電台有什麼不一樣？</p><p>電台要準時收聽；Podcast 錄好放著，想聽的時候再按播放。</p>` }), note: "用學生熟悉的 YouTube 類比：Podcast 是「只有聲音的 YouTube 節目」。" },
+    { html: S.list({ kicker: "先認識一下", title: "聽聽看：真的 Podcast", items: C.LISTEN.map((l) => `${l.show}｜${l.ep}`), aside: `<p class="s-aside-h">邊聽邊找</p><p>開場怎麼說？一集講幾個主題？誰在說話？</p>` }), note: "用平板打開學生手冊「什麼是 Podcast」→「聽聽看」，播第 1 個（約 2 分鐘）；時間夠再播第 2 個的開場 1 分鐘。" },
     { html: S.rundown("一集節目的樣子"), note: "每一段都會在腳本裡寫出來。" },
     { html: S.roadmap("我們的路線圖"), note: "12/11 是耆老錄音日；1/15 首播。" },
     { html: S.groups("分組"), note: "第 1 組 Kolas 是單人組，錄音和剪輯時老師當助理。" },

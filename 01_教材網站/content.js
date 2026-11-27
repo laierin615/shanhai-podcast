@@ -50,6 +50,16 @@
     taitung: { station: "臺東教育電台", program: "", date: "" },
   };
 
+  /** 「什麼是 Podcast」聽聽看：真的節目（Apple Podcasts 連結，iPad 點了直接開 Podcast App 播放） */
+  const LISTEN = [
+    { show: "母語 On Air", ep: "輕鬆學族語｜阿美族語 09｜今天一起學：運動", by: "國立教育廣播電臺", len: "約 2 分鐘", why: "族語老師教一個詞 onto（運動），短短一集一個主題。",
+      url: "https://podcasts.apple.com/tw/podcast/id1626803759?i=1000743240881" },
+    { show: "打開小耳朵", ep: "兒童科普｜i動物進行式：受歡迎的動物明星～認識小丑魚", by: "國立教育廣播電臺", len: "", why: "給小朋友聽的節目，聽聽主持人怎麼開場、怎麼問問題。",
+      url: "https://podcasts.apple.com/tw/podcast/id1582737271?i=1000672836209" },
+    { show: "i loma' 語你一起", ep: "（選一集）族語家庭的故事", by: "原住民族語言研究發展基金會", len: "", why: "有主持人也有來賓，最像我們要做的訪問節目。",
+      url: "https://podcasts.apple.com/tw/podcast/id1595550526" },
+  ];
+
   /** 五次上課（每次 2 節連排） */
   const SESSIONS = [
     { id: "d1", date: "11/27", full: "115.11.27（五）", lessons: [1, 2], theme: "選題與腳本" },
@@ -391,7 +401,7 @@
   ];
 
   global.COURSE = {
-    SITE, PADLET, APPS, RADIO, DRIVE, DOCS, GROUPS, SESSIONS, LESSONS, RUNDOWN, ROLES, TOPICS, RULERS, RADAR, ASKS, FOURTH_ASK, LEVELS, TABOO,
+    SITE, PADLET, LISTEN, APPS, RADIO, DRIVE, DOCS, GROUPS, SESSIONS, LESSONS, RUNDOWN, ROLES, TOPICS, RULERS, RADAR, ASKS, FOURTH_ASK, LEVELS, TABOO,
     THREE_Q, FOLLOW_UPS, COVER_SPEC, TOOLS, SHARE_METHOD, RUBRIC, LEVEL_NAMES, VOCAB, EXAMPLES, WORKSHEETS, PREP, CONSENT_TEXT,
   };
 })(window);

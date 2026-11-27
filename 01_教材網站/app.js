@@ -283,6 +283,10 @@
             <li><b>隨時都能聽</b>錄好放著，想聽就按播放；電台要準時收聽。</li>
           </ul>
         </div>
+        <h4 class="g-sub">🎧 聽聽看：真的 Podcast</h4>
+        <ul class="listen-list">${C.LISTEN.map((l, i) => `<li><a class="listen-card" href="${l.url}" target="_blank" rel="noopener"><span class="listen-n">${i + 1}</span><span><b>${l.show}</b><small>${l.ep}${l.len ? `・${l.len}` : ""}</small><em>${l.why}</em><small class="listen-by">${l.by}・按一下用 Podcast App 播放</small></span><span class="listen-play" aria-hidden="true">▶</span></a></li>`).join("")}
+          <li><a class="listen-card" href="${setting("radioAlianUrl")}" target="_blank" rel="noopener"><span class="listen-n">★</span><span><b>學長姐上電台</b><small>${C.RADIO.alian.station}${C.RADIO.alian.program}・${C.RADIO.alian.date}</small><em>這不是 Podcast，是電台節目錄下來的回放。比一比：哪裡一樣、哪裡不一樣？</em></span><span class="listen-play" aria-hidden="true">▶</span></a></li>
+        </ul>
         <h4 class="g-sub">一集節目的時間（約 14 分鐘）</h4>
         <div class="rundown-bar" style="--total:${total}">${bar}</div>
         <ol class="rundown-list">${C.RUNDOWN.map((r) => `<li><span class="mono">${r.time}</span><b>${r.seg}</b>（${r.len}，${r.who}）：${r.tip}</li>`).join("")}</ol>
