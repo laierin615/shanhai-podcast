@@ -250,6 +250,7 @@
     const stage = $("#stage"); let start = null;
     stage.addEventListener("pointerdown", (e) => { start = { x: e.clientX, y: e.clientY }; });
     stage.addEventListener("pointerup", (e) => {
+      if (e.target.closest("a")) { start = null; return; }
       if (!start) return; const dx = e.clientX - start.x; const dy = e.clientY - start.y; start = null;
       if (e.target.closest("a, button")) return;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { moveSlide(dx < 0 ? 1 : -1); return; }

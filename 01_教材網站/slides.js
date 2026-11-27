@@ -7,15 +7,35 @@
   const M = global.MOCK;
   const esc = (v) => String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const li = (items) => items.map((i) => `<li>${i}</li>`).join("");
+  /** 圖示：依關鍵字自動配一個小圖，讓條列變成看得懂的圖卡 */
+  const ICONS = [
+    [/手機|平板|iPad/, "📱"], [/猶豫|不錄/, "🤚"],
+    [/禁忌|祭儀|靈觀/, "⚠️"], [/隱私|姓名|住址/, "🔒"], [/不舒服|蓋上螢幕/, "🙈"], [/不下載/, "⛔"],
+    [/AirDrop|存檔|保存|上傳/, "📤"], [/音樂/, "🎵"], [/大聲|音量/, "🔊"], [/停頓|去頭去尾|剪/, "✂️"], [/刪掉/, "🗑️"],
+    [/耳朵|聽/, "👂"], [/錄/, "🎙️"], [/念|說|唱|問候|自我介紹/, "🗣️"], [/問|？/, "❓"],
+    [/長輩|耆老|來賓/, "👵"], [/主持人/, "🎤"], [/書|篇名|作者|出版|頁碼|圖書/, "📚"], [/網|上網/, "🌐"], [/摘錄|抄/, "✍️"],
+    [/判讀|查證|來源|找得到/, "🔍"], [/一樣/, "✅"], [/不一樣|存疑/, "🤔"], [/分鐘|秒|時間/, "⏱️"],
+    [/手機|平板|iPad|App/, "📱"], [/主題|一集/, "🎯"], [/節目名稱|封面|海報/, "🖼️"], [/民族課程|部落/, "🌾"],
+    [/邀請卡|致謝卡|送/, "💌"], [/窗/, "🪟"], [/紙箱|毛毯|角/, "📦"], [/教室/, "🏫"], [/點頭/, "🙂"], [/學到|反思|改進/, "💡"],
+    [/老師|檢查|交換/, "🧑‍🏫"], [/記/, "📝"],
+  ];
+  const iconOf = (t) => { const s = String(t).replace(/<[^>]+>/g, ""); const hit = ICONS.find(([re]) => re.test(s)); return hit ? hit[1] : "🌊"; };
+  const tiles = (items, big) => `<ul class="s-tiles ${big ? "s-tiles-big" : ""} ${items.length > 4 ? "s-tiles-2" : ""}">${items.map((it, i) => {
+    if (/^<a class="s-link/.test(it)) return `<li class="s-tile-link">${it}</li>`;
+    const o = typeof it === "object" ? it : { t: it };
+    return `<li class="s-tile s-c${i % 4}"><span class="s-ico" aria-hidden="true">${o.i || iconOf(o.t)}</span><span class="s-tt">${o.t}</span></li>`;
+  }).join("")}</ul>`;
+  const RUN_MIN = { "15 秒": 0.25, "1 分鐘": 1, "3 分鐘": 3, "6–8 分鐘": 7, "1–2 分鐘": 1.5, "30 秒": 0.5 };
+  const RUN_ICON = ["🎵", "👋", "📚", "👵", "💡", "🙏"];
   const lessonOf = (n) => C.LESSONS.find((l) => l.n === n);
   const kick = (session, n) => `${session.date}（五）・${lessonOf(n).label}｜${lessonOf(n).title}`;
 
   const S = {
     title: ({ kicker, title, sub, chips = [] }) => `<div class="s s-center"><p class="s-kicker">${kicker}</p><h2 class="s-hero">${title}</h2>${sub ? `<p class="s-sub">${sub}</p>` : ""}${chips.length ? `<div class="s-chips">${chips.map((c) => `<span>${c}</span>`).join("")}</div>` : ""}<div class="s-wave" aria-hidden="true"></div></div>`,
-    list: ({ kicker, title, items, aside = "", big = false }) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-split ${aside ? "" : "s-one"}"><ul class="s-list ${big ? "s-big" : ""}">${li(items)}</ul>${aside ? `<div class="s-aside">${aside}</div>` : ""}</div></div>`,
+    list: ({ kicker, title, items, aside = "", big = false }) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-split ${aside ? "" : "s-one"}">${tiles(items, big)}${aside ? `<div class="s-aside">${aside}</div>` : ""}</div></div>`,
     cards: ({ kicker, title, cards, cols = 3 }) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-cards" style="--cols:${cols}">${cards.map((c) => `<div class="s-card">${c.tag ? `<span class="s-tag">${c.tag}</span>` : ""}<h3>${c.h}</h3>${c.d ? `<p>${c.d}</p>` : ""}</div>`).join("")}</div></div>`,
     compare: ({ kicker, title, left, right }) => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-compare"><div class="s-cmp s-cmp-a"><h3>${left.h}</h3><p>${left.d}</p></div><div class="s-arrow">→</div><div class="s-cmp s-cmp-b"><h3>${right.h}</h3><p>${right.d}</p></div></div></div>`,
-    rundown: (kicker, title = "一集節目長這樣（約 14 分鐘）") => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-rundown">${C.RUNDOWN.map((r) => `<div class="s-run"><span class="s-time">${r.time}</span><span class="s-seg">${r.seg}<small>${r.len}・${r.who}</small></span><span class="s-tip">${r.tip}</span></div>`).join("")}</div></div>`,
+    rundown: (kicker, title = "一集節目長這樣（約 14 分鐘）") => `<div class="s"><p class="s-kicker">${kicker}</p><h2 class="s-title">${title}</h2><div class="s-rbar">${C.RUNDOWN.map((r, i) => `<div class="s-rseg s-r${i}" style="flex:${RUN_MIN[r.len] || 1}"><span class="s-rico" aria-hidden="true">${RUN_ICON[i]}</span><b>${r.seg}</b><small>${r.len}</small></div>`).join("")}</div><div class="s-rcards">${C.RUNDOWN.map((r, i) => `<div class="s-rcard s-r${i}"><span class="s-rtime">${r.time}</span><b>${RUN_ICON[i]} ${r.seg}</b><small>${r.who}</small><p>${r.tip}</p></div>`).join("")}</div></div>`,
     tool: (kicker, key, idx) => {
       const tool = C.TOOLS[key];
       const steps = idx.map((i) => ({ ...tool.steps[i], n: i + 1 }));
@@ -33,8 +53,8 @@
   const intro = { id: "intro", label: "課程總覽", sub: "第一次上課前", slides: [
     { html: S.title({ kicker: "山海專題・高年級・P3-03 期末專題", title: "Salimpo 山海之聲", sub: "每組做一集 10–15 分鐘的 Podcast，請一位耆老當來賓", chips: ["5 個星期五", "10 節課", "4 組", "1/15 首播"] }), note: "第一次上課開場。" },
     { html: S.radio("我們的學長姐上過電台", "學長姐當過受訪者，這次換你們當主持人", "這次換你們自己設計節目、自己訪問長輩。"), note: "片段連結在「成果上傳」頁設定（電台片段）。" },
-    { html: S.list({ kicker: "先認識一下", title: "什麼是 Podcast？", big: true, items: ["用耳朵聽的節目", "一集講一個主題", "有主持人，也常有來賓", "手機、平板隨時都能聽"], aside: `<p class="s-aside-h">跟電台有什麼不一樣？</p><p>電台要準時收聽；Podcast 錄好放著，想聽的時候再按播放。</p>` }), note: "用學生熟悉的 YouTube 類比：Podcast 是「只有聲音的 YouTube 節目」。" },
-    { html: S.list({ kicker: "先認識一下", title: "聽聽看：真的 Podcast", items: C.LISTEN.map((l) => `${l.show}｜${l.ep}`), aside: `<p class="s-aside-h">邊聽邊找</p><p>開場怎麼說？一集講幾個主題？誰在說話？</p>` }), note: "用平板打開學生手冊「什麼是 Podcast」→「聽聽看」，播第 1 個（約 2 分鐘）；時間夠再播第 2 個的開場 1 分鐘。" },
+    { html: S.list({ kicker: "先認識一下", title: "什麼是 Podcast？", big: true, items: ["用耳朵聽的節目", "一集講一個主題", "有主持人，也常有來賓", "手機、平板隨時都能聽"], aside: `<p class="s-aside-h">跟電台有什麼不一樣？</p><p>電台要準時收聽；Podcast 錄好放著，想聽的時候再按播放。</p><a class="s-link s-link-solo" href="${C.LISTEN[0].url}" target="_blank" rel="noopener"><b>▶ 馬上聽一段</b><small>${C.LISTEN[0].show}｜${C.LISTEN[0].ep}</small></a>` }), note: "用學生熟悉的 YouTube 類比：Podcast 是「只有聲音的 YouTube 節目」。" },
+    { html: S.list({ kicker: "先認識一下", title: "聽聽看：真的 Podcast", items: C.LISTEN.map((l) => `<a class="s-link" href="${l.url}" target="_blank" rel="noopener"><b>${l.show}</b><small>${l.ep}</small><span class="s-link-play" aria-hidden="true">▶</span></a>`), aside: `<p class="s-aside-h">邊聽邊找</p><p>開場怎麼說？一集講幾個主題？誰在說話？</p>` }), note: "點投影片上的節目名稱就會開 Podcast App 播放；播第 1 個（約 2 分鐘）；時間夠再播第 2 個的開場 1 分鐘。" },
     { html: S.rundown("一集節目的樣子"), note: "每一段都會在腳本裡寫出來。" },
     { html: S.roadmap("我們的路線圖"), note: "12/11 是耆老錄音日；1/15 首播。" },
     { html: S.groups("分組"), note: "第 1 組 Kolas 是單人組，錄音和剪輯時老師當助理。" },
