@@ -111,6 +111,15 @@ input:disabled, select:disabled, textarea:disabled { background: var(--surface-2
 .hero-meta div { padding: 8px 12px; background: var(--console); border: 1px solid var(--console-edge); border-radius: 6px; box-shadow: inset 0 2px 6px rgba(0,0,0,.5); }
 .hero-meta dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: var(--console-muted); }
 .hero-meta dd { margin: 0; font-weight: 700; color: var(--console-ink); }
+.hero-side { display: grid; gap: 10px; min-width: 0; }
+.hero-qr { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 14px; align-items: center; margin: 0; padding: 10px; background: var(--console); border: 1px solid var(--console-edge); border-radius: 8px; box-shadow: inset 0 2px 6px rgba(0,0,0,.5); }
+.hero-qr-code { width: 124px; aspect-ratio: 1; background: #fff; border-radius: 6px; padding: 4px; }
+.hero-qr-code .qr-svg { width: 100%; height: 100%; display: block; }
+.hero-qr-code .qr-missing { font-size: 11px; color: #0b1b1f; border: 0; padding: 2px; }
+.hero-qr figcaption { display: grid; gap: 2px; min-width: 0; }
+.hero-qr figcaption b { font-size: 17px; color: var(--console-ink); }
+.hero-qr figcaption span { font-size: 14px; color: var(--console-soft); }
+.hero-qr figcaption a { font-family: var(--font-mono); font-size: 12px; color: var(--led-amber); word-break: break-all; }
 .hero-wave, .s-wave { display: flex; align-items: flex-end; gap: 3px; height: 64px; --meter-h: 64px; }
 .hero-wave { grid-column: 1 / -1; padding: 8px 10px; height: 82px; background: var(--console); border-radius: 8px; box-shadow: inset 0 2px 8px rgba(0,0,0,.6); --m-low: var(--led-green); --m-mid: var(--led-amber); --m-high: var(--led-red); }
 .s-wave { --m-low: var(--hill); --m-mid: var(--sun); --m-high: var(--red); }
@@ -458,12 +467,18 @@ input:disabled, select:disabled, textarea:disabled { background: var(--surface-2
         <h1><small>P3-03・山海專題・高年級</small>Salimpo<br>山海之聲</h1>
         <p class="hero-lead">四組同學各選一個和民族課程有關的主題，邀請一位耆老當來賓，用 iPad 錄一集 10–15 分鐘的 Podcast，1/15 首播。</p>
       </div>
-      <dl class="hero-meta">
-        <div><dt>單元</dt><dd>P3-03 期末專題</dd></div>
-        <div><dt>上課</dt><dd>5 個星期五・10 節</dd></div>
-        <div><dt>學生</dt><dd>5、6 年級 7 人・4 組</dd></div>
-        <div><dt>教學者</dt><dd>賴奕芸</dd></div>
-      </dl>
+      <div class="hero-side">
+        <dl class="hero-meta">
+          <div><dt>單元</dt><dd>P3-03 期末專題</dd></div>
+          <div><dt>上課</dt><dd>5 個星期五・10 節</dd></div>
+          <div><dt>學生</dt><dd>5、6 年級 7 人・4 組</dd></div>
+          <div><dt>教學者</dt><dd>賴奕芸</dd></div>
+        </dl>
+        <figure class="hero-qr">
+          <div class="hero-qr-code" id="site-qr"></div>
+          <figcaption><b>掃描打開這個網站</b><span>iPad 打開「相機」對準 QR Code，點跳出來的連結</span><a id="site-url" href="#" target="_blank" rel="noopener"></a></figcaption>
+        </figure>
+      </div>
       <div class="hero-wave" aria-hidden="true"></div>
     </div>
     <div>

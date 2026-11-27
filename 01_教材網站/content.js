@@ -5,6 +5,9 @@
 (function defineCourse(global) {
   "use strict";
 
+  /** 網站公開網址（GitHub Pages），總覽頁的 QR Code 用這個 */
+  const SITE = { url: "https://laierin615.github.io/shanhai-podcast/" };
+
   const DRIVE = {
     root: "https://drive.google.com/drive/folders/1BUgyPjOAowk7Y-_7wGaOGINEq8jVu_a-",
     teacher: "https://drive.google.com/drive/folders/12ixXCSANxw7aB7kQnrN_JcsVVjKD38wS",
@@ -385,7 +388,7 @@
   ];
 
   global.COURSE = {
-    APPS, RADIO, DRIVE, DOCS, GROUPS, SESSIONS, LESSONS, RUNDOWN, ROLES, TOPICS, RULERS, RADAR, ASKS, FOURTH_ASK, LEVELS, TABOO,
+    SITE, APPS, RADIO, DRIVE, DOCS, GROUPS, SESSIONS, LESSONS, RUNDOWN, ROLES, TOPICS, RULERS, RADAR, ASKS, FOURTH_ASK, LEVELS, TABOO,
     THREE_Q, FOLLOW_UPS, COVER_SPEC, TOOLS, SHARE_METHOD, RUBRIC, LEVEL_NAMES, VOCAB, EXAMPLES, WORKSHEETS, PREP, CONSENT_TEXT,
   };
 })(window);

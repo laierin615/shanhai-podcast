@@ -179,6 +179,9 @@
     $("#prep").addEventListener("change", (e) => { const box = e.target.closest("[data-prep]"); if (!box) return; const s = store.read("p303:prep2", {}); s[box.dataset.prep] = box.checked; store.write("p303:prep2", s); });
     $("#docs").innerHTML = C.DOCS.map((d) => `<li><a href="${d.url}" target="_blank" rel="noopener">${d.label}</a></li>`).join("");
     $(".hero-wave").innerHTML = waveHtml(64, 1.3);
+    $("#site-qr").innerHTML = qrSvg(C.SITE.url, "山海之聲網站 QR Code");
+    $("#site-url").href = C.SITE.url;
+    $("#site-url").textContent = C.SITE.url.replace(/^https:\/\//, "").replace(/\/$/, "");
   }
 
   /* ---------- 簡報 ---------- */
